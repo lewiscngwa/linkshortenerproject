@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 import "./globals.css";
+import ThemeToggleClient from "./components/ThemeToggleClient";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,12 +32,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <header className="flex items-center justify-between gap-4 p-3">
+            <a href="/" className="text-lg font-semibold">LinkShortener</a>
+
+            <div className="flex items-center gap-3">
+              <ThemeToggleClient />
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <button className="h-10 rounded-full bg-foreground px-4 text-background">Sign in</button>
+                </SignInButton>
+
+                <SignUpButton mode="modal">
+                  <button className="h-10 rounded-full border border-solid border-black/[.08] px-4">Sign up</button>
+                </SignUpButton>
+              </SignedOut>
+
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </div>
+          </header>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
