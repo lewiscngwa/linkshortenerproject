@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Link2 } from "lucide-react";
 import {
   ClerkProvider,
   SignInButton,
@@ -37,8 +38,11 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <header className="flex items-center justify-between gap-4 p-3">
-            <a href="/" className="text-lg font-semibold">LinkShortener</a>
+          <header className="flex items-center justify-between gap-4 p-3 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <a href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
+              <Link2 className="h-6 w-6" />
+              <span>LinkShortener</span>
+            </a>
 
             <div className="flex items-center gap-3">
               <ThemeToggleClient />

@@ -40,7 +40,7 @@
 
  ```tsx
  // app/dashboard/page.tsx (server component)
- import { currentUser } from '@clerk/nextjs';
+ import { currentUser } from '@clerk/nextjs/server';
  import { redirect } from 'next/navigation';
 
  export default async function DashboardPage() {
@@ -53,36 +53,39 @@
  }
 ```
 
- 3) Middleware approach (optional, centralizes redirects)
+ 3) Middleware approach (REQUIRED for auth detection)
 
  ```ts
  // middleware.ts
+ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
  import { NextResponse } from 'next/server';
- import type { NextRequest } from 'next/server';
- import { auth } from '@clerk/nextjs/server';
 
- export function middleware(req: NextRequest) {
-   const { userId } = auth(req);
+ const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
+ const isPublicRoute = createRouteMatcher(['/']);
+
+ export default clerkMiddleware(async (auth, req) => {
+   const { userId } = await auth();
    const { pathname } = req.nextUrl;
 
    // Redirect signed-in users away from `/` to `/dashboard`
-   if (pathname === '/' && userId) {
+   if (isPublicRoute(req) && pathname === '/' && userId) {
      return NextResponse.redirect(new URL('/dashboard', req.url));
    }
 
    // Protect dashboard path: forward unauthenticated users to `/` and flag modal
-   if (pathname.startsWith('/dashboard') && !userId) {
+   if (isProtectedRoute(req) && !userId) {
      const url = req.nextUrl.clone();
      url.pathname = '/';
      url.searchParams.set('clerk_modal', 'sign-in');
      return NextResponse.redirect(url);
    }
-
-   return NextResponse.next();
- }
+ });
 
  export const config = {
-   matcher: ['/dashboard/:path*', '/'],
+   matcher: [
+     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+     '/(api|trpc)(.*)',
+   ],
  };
 ```
 
