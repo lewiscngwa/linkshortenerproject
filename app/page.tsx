@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { currentUser } from '@clerk/nextjs/server';
-import { Link2, Zap, BarChart3, Shield, Sparkles, Clock } from 'lucide-react';
+import { Link2, Zap, BarChart3, Shield, Sparkles, Clock, Check } from 'lucide-react';
 import HomeClient from './home/HomeClient';
 
 export default async function Home(): Promise<JSX.Element> {
@@ -134,17 +134,7 @@ export default async function Home(): Promise<JSX.Element> {
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <div className="mt-1 rounded-full bg-primary/10 p-1">
-                    <svg
-                      className="h-4 w-4 text-primary"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
+                    <Check className="h-4 w-4 text-primary" />
                   </div>
                   <div>
                     <strong className="font-semibold">No credit card required</strong>
@@ -155,17 +145,7 @@ export default async function Home(): Promise<JSX.Element> {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-1 rounded-full bg-primary/10 p-1">
-                    <svg
-                      className="h-4 w-4 text-primary"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
+                    <Check className="h-4 w-4 text-primary" />
                   </div>
                   <div>
                     <strong className="font-semibold">Real-time analytics</strong>
@@ -176,17 +156,7 @@ export default async function Home(): Promise<JSX.Element> {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-1 rounded-full bg-primary/10 p-1">
-                    <svg
-                      className="h-4 w-4 text-primary"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path d="M5 13l4 4L19 7"></path>
-                    </svg>
+                    <Check className="h-4 w-4 text-primary" />
                   </div>
                   <div>
                     <strong className="font-semibold">Easy collaboration</strong>
@@ -199,6 +169,7 @@ export default async function Home(): Promise<JSX.Element> {
             </div>
             <div className="flex items-center justify-center">
               <div className="text-center">
+                {/* Note: This is illustrative marketing copy for the landing page, not real-time data */}
                 <div className="mb-4 text-6xl font-bold text-primary">10K+</div>
                 <p className="text-xl font-semibold">Links Created</p>
                 <p className="mt-2 text-muted-foreground">
