@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import { currentUser } from '@clerk/nextjs/server';
 import { Link2, Zap, BarChart3, Shield, Sparkles, Clock, Check } from 'lucide-react';
 import HomeClient from './home/HomeClient';
+import ScrollToTop from './home/ScrollToTop';
 
 export default async function Home(): Promise<JSX.Element> {
   const user = await currentUser();
@@ -194,6 +195,9 @@ export default async function Home(): Promise<JSX.Element> {
           <HomeClient />
         </div>
       </section>
+
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
     </div>
   );
 }
