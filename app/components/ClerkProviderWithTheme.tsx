@@ -22,28 +22,22 @@ export default function ClerkProviderWithTheme({
   });
 
   useEffect(() => {
-    // Listen for theme changes
-    const handleStorageChange = () => {
-      const stored = localStorage.getItem(THEME_KEY);
-      if (stored === "dark" || stored === "light") {
-        setTheme(stored);
+    // Listen for theme changes by observing the html element's class
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      const newTheme = isDark ? "dark" : "light";
+      if (newTheme !== theme) {
+        setTheme(newTheme);
       }
-    };
+    });
 
-    // Listen for storage events (from other tabs)
-    window.addEventListener("storage", handleStorageChange);
-
-    // Poll for changes since localStorage events don't fire in the same tab
-    const interval = setInterval(() => {
-      const stored = localStorage.getItem(THEME_KEY);
-      if (stored && stored !== theme) {
-        setTheme(stored);
-      }
-    }, 100);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      clearInterval(interval);
+      observer.disconnect();
     };
   }, [theme]);
 
