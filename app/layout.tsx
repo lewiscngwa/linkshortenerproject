@@ -12,6 +12,7 @@ import {
 import "./globals.css";
 import ThemeToggleClient from "./components/ThemeToggleClient";
 import ClerkProviderWithTheme from "./components/ClerkProviderWithTheme";
+import MobileMenu from "./components/MobileMenu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
