@@ -2,17 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { Link2 } from "lucide-react";
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
 import "./globals.css";
-import ThemeToggleClient from "./components/ThemeToggleClient";
 import ClerkProviderWithTheme from "./components/ClerkProviderWithTheme";
-import MobileMenu from "./components/MobileMenu";
+import HeaderActions from "./components/HeaderActions";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,32 +38,7 @@ export default function RootLayout({
               <span>LinkShortener</span>
             </Link>
 
-            <div className="flex items-center gap-3">
-              <div className="hidden md:flex items-center gap-3">
-                <ThemeToggleClient />
-                <SignedOut>
-                  <SignInButton mode="modal">
-                    <button className="h-10 rounded-full bg-foreground px-4 text-background">Sign in</button>
-                  </SignInButton>
-
-                  <SignUpButton mode="modal">
-                    <button className="h-10 rounded-full border border-solid border-black/[.08] dark:border-white/[.145] px-4">Sign up</button>
-                  </SignUpButton>
-                </SignedOut>
-
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
-              </div>
-
-              <SignedOut>
-                <MobileMenu />
-              </SignedOut>
-
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-            </div>
+            <HeaderActions />
           </header>
           {children}
         </body>
