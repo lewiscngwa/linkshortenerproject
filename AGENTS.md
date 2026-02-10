@@ -36,6 +36,11 @@ Purpose: provide clear, actionable rules for LLM-based agents working in this re
 - Use project tools: respect existing linting, formatting, and build scripts (see `package.json`).
 - DO NOT use any deprecated code
 
+## ⛔ Deprecated Patterns
+- **NEVER use `middleware.ts`** — this file pattern is deprecated in this project. Always use `proxy.ts` instead for middleware functionality, authentication routing, and request handling.
+- Do not create, reference, or suggest creating a `middleware.ts` file at the project root or in any subdirectory.
+- If you encounter existing `middleware.ts` references in code or documentation, flag them for removal and suggest `proxy.ts` alternatives.
+
 ## Editing rules
 - Use the `apply_patch` workflow for all edits (or the equivalent programmatic patch tool). Make atomic patches per logical change.
 - Do not change unrelated import paths, formatting preferences, or build config unless the change is required.
