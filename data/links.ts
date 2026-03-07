@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { db } from '@/db';
 import { shortLinks } from '@/db/schema';
 
@@ -17,7 +17,8 @@ export async function getLinksByUserId(
   return db
     .select()
     .from(shortLinks)
-    .where(eq(shortLinks.ownerUserId, userId));
+    .where(eq(shortLinks.ownerUserId, userId))
+    .orderBy(desc(shortLinks.createdAt));
 }
 
 export async function createShortLink(data: {
