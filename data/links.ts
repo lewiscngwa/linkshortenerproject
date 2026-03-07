@@ -54,3 +54,74 @@ export async function checkCodeExists(code: string): Promise<boolean> {
 
   return !!result;
 }
+
+export async function getLinkById(
+  id: number,
+  userId: string,
+): Promise<{
+  id: number;
+  code: string;
+  destinationUrl: string;
+  ownerUserId: string;
+  createdAt: Date;
+  updatedAt: Date;
+} | null> {
+  const [result] = await db
+    .select()
+    .from(shortLinks)
+    .where(eq(shortLinks.id, id))
+    .limit(1);
+
+  if (!result || result.ownerUserId !== userId) {
+    return null;
+  }
+
+  return result;
+}
+
+export async function updateShortLink(
+  id: number,
+  userId: string,
+  data: {
+    destinationUrl: string;
+    code: string;
+  },
+): Promise<{
+  id: number;
+  code: string;
+  destinationUrl: string;
+  ownerUserId: string;
+  createdAt: Date;
+  updatedAt: Date;
+} | null> {
+  // First verify ownership
+  const existing = await getLinkById(id, userId);
+  if (!existing) {
+    return null;
+  }
+
+  const [result] = await db
+    .update(shortLinks)
+    .set({
+      destinationUrl: data.destinationUrl,
+      code: data.code,
+    })
+    .where(eq(shortLinks.id, id))
+    .returning();
+
+  return result;
+}
+
+export async function deleteShortLink(
+  id: number,
+  userId: string,
+): Promise<boolean> {
+  // First verify ownership
+  const existing = await getLinkById(id, userId);
+  if (!existing) {
+    return false;
+  }
+
+  await db.delete(shortLinks).where(eq(shortLinks.id, id));
+  return true;
+}

@@ -2,6 +2,8 @@ import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { getLinksByUserId } from '@/data/links';
 import { CreateLinkDialog } from './CreateLinkDialog';
+import { EditLinkDialog } from './EditLinkDialog';
+import { DeleteLinkDialog } from './DeleteLinkDialog';
 import { Button } from '@/components/ui/button';
 
 export default async function DashboardPage(): Promise<React.JSX.Element> {
@@ -34,10 +36,22 @@ export default async function DashboardPage(): Promise<React.JSX.Element> {
                 className="border rounded-lg p-4 hover:bg-accent transition-colors"
               >
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-between">
                     <span className="font-mono text-sm font-semibold">
                       /{link.code}
                     </span>
+                    <div className="flex gap-2">
+                      <EditLinkDialog link={link}>
+                        <Button variant="outline" size="sm">
+                          Edit
+                        </Button>
+                      </EditLinkDialog>
+                      <DeleteLinkDialog link={link}>
+                        <Button variant="destructive" size="sm">
+                          Delete
+                        </Button>
+                      </DeleteLinkDialog>
+                    </div>
                   </div>
                   <div className="text-sm text-muted-foreground">
                     <span className="font-medium">Destination:</span>{' '}
