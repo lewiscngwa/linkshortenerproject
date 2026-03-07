@@ -18,7 +18,7 @@ export async function getLinksByUserId(
     .select()
     .from(shortLinks)
     .where(eq(shortLinks.ownerUserId, userId))
-    .orderBy(desc(shortLinks.createdAt));
+    .orderBy(desc(shortLinks.updatedAt));
 }
 
 export async function createShortLink(data: {
