@@ -8,6 +8,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 
+import { Button } from "@/components/ui/button";
 import MobileMenu from "./MobileMenu";
 import ThemeToggleClient from "./ThemeToggleClient";
 
@@ -19,15 +20,11 @@ export default function HeaderActions() {
 
         <SignedOut>
           <SignInButton mode="modal">
-            <button className="h-10 rounded-full bg-foreground px-4 text-background">
-              Sign in
-            </button>
+            <Button>Sign in</Button>
           </SignInButton>
 
           <SignUpButton mode="modal">
-            <button className="h-10 rounded-full border border-solid border-black/[.08] dark:border-white/[.145] px-4">
-              Sign up
-            </button>
+            <Button variant="outline">Sign up</Button>
           </SignUpButton>
         </SignedOut>
 

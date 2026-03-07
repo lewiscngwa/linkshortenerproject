@@ -7,6 +7,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import ThemeToggleClient from "./ThemeToggleClient";
 
 export default function MobileMenu() {
@@ -29,15 +30,11 @@ export default function MobileMenu() {
           
           <div className="flex flex-col gap-3">
             <SignInButton mode="modal">
-              <button className="h-10 rounded-full bg-foreground px-4 text-background w-full">
-                Sign in
-              </button>
+              <Button className="w-full rounded-full">Sign in</Button>
             </SignInButton>
 
             <SignUpButton mode="modal">
-              <button className="h-10 rounded-full border border-solid border-black/[.08] dark:border-white/[.145] px-4 w-full">
-                Sign up
-              </button>
+              <Button variant="outline" className="w-full rounded-full">Sign up</Button>
             </SignUpButton>
           </div>
         </nav>
