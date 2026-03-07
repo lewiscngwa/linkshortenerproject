@@ -125,3 +125,20 @@ export async function deleteShortLink(
   await db.delete(shortLinks).where(eq(shortLinks.id, id));
   return true;
 }
+
+export async function getLinkByCode(code: string): Promise<{
+  id: number;
+  code: string;
+  destinationUrl: string;
+  ownerUserId: string;
+  createdAt: Date;
+  updatedAt: Date;
+} | null> {
+  const [result] = await db
+    .select()
+    .from(shortLinks)
+    .where(eq(shortLinks.code, code))
+    .limit(1);
+
+  return result || null;
+}
