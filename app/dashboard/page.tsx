@@ -1,8 +1,10 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { getLinksByUserId } from '@/data/links';
+import { CreateLinkDialog } from './CreateLinkDialog';
+import { Button } from '@/components/ui/button';
 
-export default async function DashboardPage(): Promise<JSX.Element> {
+export default async function DashboardPage(): Promise<React.JSX.Element> {
   const user = await currentUser();
   if (!user) {
     redirect('/?clerk_modal=sign-in');
@@ -12,7 +14,12 @@ export default async function DashboardPage(): Promise<JSX.Element> {
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <CreateLinkDialog>
+          <Button>Create New Link</Button>
+        </CreateLinkDialog>
+      </div>
       
       <section>
         <h2 className="text-2xl font-semibold mb-4">Your Links</h2>
