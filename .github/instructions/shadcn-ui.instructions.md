@@ -1,3 +1,6 @@
+---
+description: Read this file before creating or modifying any shadcn UI components or using shadcn components in your code. This document defines the project-wide guidelines for using the shadcn UI component library to ensure a consistent, accessible design system across the codebase.
+---
 # shadcn UI Guidelines
 
 Purpose: Enforce consistent, accessible UI by using the project's shadcn UI component library for every UI element. Do not create standalone custom design-system components unless explicitly approved by maintainers.

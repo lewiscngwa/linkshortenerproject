@@ -1,3 +1,6 @@
+---
+description: Read this file before creating or updating any frontend code. This document defines the project-wide frontend guidelines for Next.js, TypeScript, and Drizzle usage to ensure consistent, maintainable code.
+---
 # Frontend Guidelines — Next.js + TypeScript + Drizzle
 
 Purpose: Provide concise, actionable frontend conventions for this repository. Follow these rules to keep code consistent, safe, and easy to review.

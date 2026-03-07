@@ -2,34 +2,11 @@
 
 Purpose: provide clear, actionable rules for LLM-based agents working in this repository. These guidelines are tailored for safe, consistent, and minimal-impact edits to a Next.js + TypeScript project using Drizzle for DB interactions.
 
-## ⚠️ CRITICAL: Read Documentation FIRST
-
-**BEFORE generating ANY code, you MUST:**
-
-1. **Identify the relevant domain** (authentication, UI components, frontend patterns, etc.)
-2. **Read the corresponding `/docs/*.md` file(s)** completely
-3. **Follow all rules and patterns** specified in those documents
-4. **Use only non-deprecated APIs and patterns** as documented
-
-**Available documentation:**
-- `docs/authentication.md` — Clerk auth rules, middleware patterns, protected routes, modal flows
-- `docs/shadcn-ui.md` — UI component rules, import patterns, composition, accessibility
-- `docs/frontend-guidelines.md` — Next.js + TypeScript conventions, environment variables, Drizzle patterns
-
-**Failure to read documentation BEFORE coding will result in:**
-- Using deprecated APIs or patterns
-- Violating project conventions
-- Creating inconsistent code that requires rework
-- Potentially breaking authentication or security
-
-**This is NOT optional. Always read docs first.**
-
 ## Scope
 - Apply to any automated LLM agent, Copilot-style assistant, or human-in-the-loop automation that edits code, documentation, or configuration in this repo.
 - Agents should make focused changes, explain intent, and avoid wide-reaching refactors unless explicitly asked.
 
 ## Core Principles
-- **Documentation-first**: ALWAYS read relevant `/docs/*.md` files BEFORE writing any code. This is mandatory, not optional.
 - Safety: never introduce secrets, credentials, or hard-coded environment variables. Use `.env.local` for local secrets and reference `process.env` only.
 - Minimal diffs: prefer the smallest change that solves the problem. Avoid modifying unrelated files.
 - Explain changes: for each non-trivial edit include a one-paragraph rationale and concise test instructions.

@@ -1,4 +1,6 @@
-++ begin
+---
+description: Read this file before implementing any authentication-related code. This document defines the project-wide authentication rules and provides clear implementation patterns for using Clerk as the sole auth provider in this Next.js project.
+---
  # Authentication — Clerk (Repository Rules & Implementation)
 
  Purpose
@@ -141,5 +143,3 @@
 
  Rationale (for agent authors)
  - Keep changes minimal and test locally. For any changes to auth flows or to add other auth providers, stop and request human approval.
-
-++ end
